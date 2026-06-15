@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Golden Crust | Cinematic Cafe & Bakery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #4a2c1b;
+            --secondary: #d39e5e;
+            --dark-bg: #0f0b08;
+            --light-bg: #fdfbf7;
+            --card-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: #33221a;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: rgba(15, 11, 8, 0.85);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav .logo span { color: var(--secondary); }
+        nav ul { display: flex; list-style: none; gap: 35px; }
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+        nav ul li a:hover { color: var(--secondary); transform: translateY(-2px); }
+
+        /* Hero Section with Live Cafe Atmosphere */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(15, 11, 8, 0.55), rgba(15, 11, 8, 0.75)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1600') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            color: #f0e6df;
+            animation: fadeInUp 1.3s ease;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--secondary), #b87d3b);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(211, 158, 94, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(211, 158, 94, 0.5);
+        }
+
+        /* Section Settings */
+        section { padding: 100px 8%; }
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 60px;
+        }
+        .section-title span { font-style: italic; color: var(--secondary); }
+
+        /* NEW: Ambient Sitting Arrangement & Customers Section */
+        .ambience-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background-color: #fff;
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .ambience-gallery {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .ambience-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.4s;
+        }
+
+        .ambience-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .ambience-content {
+            flex: 1;
+        }
+
+        .ambience-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Live Sitting Status Tracker */
+        .sitting-status {
+            margin-top: 30px;
+            background: #fdf7f2;
+            padding: 20px;
+            border-left: 4px solid var(--secondary);
+            border-radius: 4px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #2ed573;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Menu Grid Section (10 Items) */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(74, 44, 27, 0.05);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 45px rgba(74, 44, 27, 0.15);
+        }
+
+        .product-img { height: 240px; overflow: hidden; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .product-card:hover .product-img img { transform: scale(1.1); }
+
+        .tag {
+            position: absolute;
+            top: 15px; left: 15px;
+            background: var(--primary); color: #fff;
+            padding: 5px 15px; font-size: 0.75rem;
+            text-transform: uppercase; border-radius: 30px; z-index: 2;
+        }
+
+        .product-info { padding: 25px; text-align: center; }
+        .product-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; color: var(--primary); }
+        .product-info p { font-size: 0.85rem; color: #66554b; margin-bottom: 15px; height: 40px; }
+        .product-price { font-size: 1.25rem; font-weight: 600; color: #b87d3b; }
+
+        /* Booking / Contact Form */
+        .contact { background-color: #f7f3ed; }
+        .contact-container { max-width: 700px; margin: 0 auto; background: #fff; padding: 50px; border-radius: 25px; box-shadow: var(--card-shadow); }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 15px; border: 1px solid #e0dcd5; border-radius: 12px; font-size: 0.95rem; outline: none; background-color: #fdfdfd;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--secondary); }
+        .contact-container button { width: 100%; background: var(--primary); color: white; border: none; padding: 16px; font-weight: 600; border-radius: 12px; cursor: pointer; }
+
+        footer { background-color: var(--dark-bg); color: #a0958d; text-align: center; padding: 40px 20px; font-size: 0.9rem; }
+
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { transform: scale(0.9); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.7; } }
+
+        @media (max-width: 992px) {
+            .ambience-container { flex-direction: column; padding: 30px; }
+            .hero h1 { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <nav>
+        <div class="logo">GOLDEN<span>CRUST</span></div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#ambience">Sitting Experience</a></li>
+            <li><a href="#menu">Our Menu</a></li>
+            <li><a href="#booking">Book Table</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section: Background captures lively cafe crowds and layouts -->
+    <div id="home" class="hero">
+        <h1>Where Every Sip Meets A Story</h1>
+        <p>Experience our live rustic wooden dynamic spaces, filled with cozy lighting, laughing friends, and fresh morning brews.</p>
+        <a href="#ambience" class="btn">Explore Sitting Lounge</a>
+    </div>
+
+    <!-- NEW SECTION: Ambience & Live Sitting Arrangement -->
+    <section id="ambience">
+        <h2 class="section-title">Cinematic Lounge & <span>Sitting Layout</span></h2>
+        <div class="ambience-container">
+            
+            <!-- Live Images showcasing customers, tables and arrangements -->
+            <div class="ambience-gallery">
+                <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=500" alt="Cozy Window Seating">
+                <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=500" alt="Customers Chatting">
+                <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=500" alt="Espresso Bar Counter">
+                <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=500" alt="Friends Dining Area">
+            </div>
+
+            <!-- Content details about the environment -->
+            <div class="ambience-content">
+                <h3>Our Aesthetic Social Space</h3>
+                <p>Designed with brick walls, glowing warm edison lamps, and ergonomic plush seating, our cafe provides the ultimate spot for remote work, long conversations, or peaceful reading sessions.</p>
+                <p>Enjoy the background hum of brewing coffee beans and acoustic melodies while you savor your artisan snacks.</p>
+                
+                <!-- Live Dynamic Status Tracker -->
+                <div class="sitting-status">
+                    <div class="status-item">
+                        <span>Window Corner Couches (Table 1-4)</span>
+                        <span><span class="status-dot"></span> 2 Available</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Central Community Table (Up to 12 seats)</span>
+                        <span style="color: #e74c3c;">● Fully Booked</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Outdoor Balcony Deck (Fresh Air Zone)</span>
+                        <span><span class="status-dot"></span> 3 Available</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Signature 10 Items Menu Section -->
+    <section id="menu">
+        <h2 class="section-title">The <span>Signature 10</span> Menu</h2>
+        <div class="menu-grid">
+            
+            <!-- Item 1 -->
+            <div class="product-card">
+                <span class="tag">Best Seller</span>
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=500" alt="Cookie"></div>
+                <div class="product-info"><h3>Choco Chip Supreme</h3><p>Gigantic golden cookie overflowing with warm, gooey Belgian chocolate pools.</p><span class="product-price">₹120</span></div>
+            </div>
+            <!-- Item 2 -->
+            <div class="product-card"><span class="tag">Luxury</span><div class="product-img"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=500" alt="Cake"></div><div class="product-info"><h3>Dark Truffle Fudge</h3><p>Decadent layers of dense chocolate sponge wrapped in silky premium velvet ganache.</p><span class="product-price">₹850</span></div></div>
+            <!-- Item 3 -->
+            <div class="product-card"><span class="tag">Classic</span><div class="product-img"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=500" alt="Croissant"></div><div class="product-info"><h3>27-Layer Butter Croissant</h3><p>Incredibly flaky, crisp outer crust bursting with premium pure French butter aroma.</p><span class="product-price">₹150</span></div></div>
+            <!-- Item 4 -->
+            <div class="product-card"><span class="tag">Trending</span><div class="product-img"><img src="https://images.unsplash.com/photo-1557925923-cd4648e21187?q=80&w=500" alt="Cupcake"></div><div class="product-info"><h3>Red Velvet Cream Swirl</h3><p>Light cocoa buttermilk base frosted elegantly with deep vanilla cream cheese.</p><span class="product-price">₹90</span></div></div>
+            <!-- Item 5 -->
+            <div class="product-card"><span class="tag">Glazed</span><div class="product-img"><img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=500" alt="Donut"></div><div class="product-info"><h3>Pink Strawberry Donut</h3><p>Soft fluffy ring dipped in premium berry glaze, topped with colorful sugar pearls.</p><span class="product-price">₹110</span></div></div>
+            <!-- Item 6 -->
+            <div class="product-card"><span class="tag">Fudgy</span><div class="product-img"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=500" alt="Brownie"></div><div class="product-info"><h3>Walnut Loaded Brownie</h3><p>Ultra-fudgy dark chocolate slice packed thickly with crunchily roasted walnuts.</p><span class="product-price">₹160</span></div></div>
+            <!-- Item 7 -->
+            <div class="product-card"><span class="tag">Healthy</span><div class="product-img"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500" alt="Sourdough"></div><div class="product-info"><h3>Artisan Sourdough Bread</h3><p>Naturally fermented crisp-crusted loaf with a wonderfully soft, tangy core.</p><span class="product-price">₹220</span></div></div>
+            <!-- Item 8 -->
+            <div class="product-card"><span class="tag">Premium</span><div class="product-img"><img src="https://images.unsplash.com/photo-1544991587-b1429df29aa5?q=80&w=500" alt="Macaron"></div><div class="product-info"><h3>French Almond Macarons</h3><p>Delicate crisp almond shells sandwiched with real raspberry white chocolate cream.</p><span class="product-price">₹80 / pc</span></div></div>
+            <!-- Item 9 -->
+            <div class="product-card"><span class="tag">Fruit Delight</span><div class="product-img"><img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&w=500" alt="Muffin"></div><div class="product-info"><h3>Bursting Blueberry Muffin</h3><p>Moist vanilla muffin loaded to the brim with real wild blueberry compote cores.</p><span class="product-price">₹130</span></div></div>
+            <!-- Item 10 -->
+            <div class="product-card"><span class="tag">Warm Swirl</span><div class="product-img"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500" alt="Cinnamon"></div><div class="product-info"><h3>Glazed Cinnamon Swirl</h3><p>Soft brown-sugar rolled dough glazed flawlessly with sugary sweet vanilla icing.</p><span class="product-price">₹140</span></div></div>
+
+        </div>
+    </section>
+
+    <!-- Table Reservation Section -->
+    <section id="booking" class="contact">
+        <h2 class="section-title">Reserve Your <span>Cozy Spot</span></h2>
+        <div class="contact-container">
+            <form onsubmit="event.preventDefault(); alert('Table booking request successfully received! Check email for seat allocation confirmation.');">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="" disabled selected>Select Seating Zone</option>
+                        <option value="window">Window Side Couches (Cosy View)</option>
+                        <option value="main">Main Lounge Hall (Vibrant Ambiance)</option>
+                        <option value="balcony">Open Air Balcony Deck</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="number" min="1" max="10" placeholder="Number of Guests" required>
+                </div>
+                <button type="submit">Confirm Table Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 The Golden Crust Luxury Cafe. Sip, Snack, and Unwind.</p>
+    </footer>
+
+</body>
+</html>
